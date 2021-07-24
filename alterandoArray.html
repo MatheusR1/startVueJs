@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue Project</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+</head>
+
+<body>
+
+    <div id="app">
+        <template>
+            <ul v-for = 'item in products'>
+                <li> id :  {{item.id}} | nome: {{item.nome}}</li>
+            </ul>
+            <input @keyup.enter="addProduto" placeholder="nome"></input>
+            <button @click="addPosition"> insira</button>
+        </template>
+    </div>
+
+    <script>
+
+        new Vue({
+            el: '#app',
+            data: {
+                products  : [
+                    {id : 1 , nome: 'produto 1 '},
+                    {id : 2 , nome: 'produto 2 '},
+                    {id : 3 , nome: 'produto 3 '},
+                    {id : 4 , nome: 'produto 4 '},
+                    {id : 5 , nome: 'produto 5 '},
+                    {id : 6 , nome: 'produto 6 '}
+                ]
+            },
+            methods: {
+                addProduto () {
+                    let value = event.target.value;
+                    this.products.push({id : this.products.length+1 , nome : event.target.value }); // add new value in list
+                    // this.products.slice( 0 , 4) cut list from position 0 to 3.
+                },
+                addPosition() { 
+                    // this.products[0] = {id : 07 , nome: 'jpaosdk'} not working, because not reactive.
+                    newValue = {id : 07 , nome: 'jpaosdk'};
+                    // Vue.set(this.products, 0 , newValue) it works, beacuse is reative
+                    // or
+                    // this.$set(this.products, 0 , newValue)
+                    //or using js 
+                    this.products.splice(5 , 1 , newValue);
+
+                }
+
+            },
+            computed: {
+                nomeCompleto: {
+                    get() {
+                        return this.primeiroNome + ' ' + this.ultimoNome;
+                    },
+
+                    set(novoNome) {
+                        let nomes = novoNome.split(' ')
+                        console.log(nomes)
+                        this.primeiroNome = nomes[0];
+                        this.ultimoNome = nomes[nomes.length - 1];
+                    }
+                }
+            }
+        })
+
+    </script>
+</body>
+
+</html>
