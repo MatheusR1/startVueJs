@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue Project</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+</head>
+<body>
+
+    <div id="app">
+       <h1> {{titulo}} </h1> 
+        <button @click = "alterarTitulo">Alterar titulo </button>
+        <button @click = "destruirInstancia">Alterar titulo </button>
+    </div>
+
+    <script>  
+    
+        new Vue({
+            el:'#app',
+            data: { 
+                titulo : 'Matheus'
+            },
+            methods : {
+                alterarTitulo ( event ) {
+                    this.titulo = 'Matheus é foda'
+                },
+                destruirInstancia() {
+                    this.$destroy();
+                }
+            },
+
+            beforeCreate () {
+                console.log('beforeCreate - 01')
+            },
+
+            created () {
+                console.log('created - 02')
+            },
+
+            beforeMount () {
+                console.log('beforeMount - 03')
+            },
+
+            mounted () {
+                console.log('mounted - 04')
+            },
+
+            beforeUpdate() {
+                console.log('beforeUpdate - 05')
+            },
+
+            updated(){
+                console.log('updated - 06')
+            },
+
+            beforeDestroy(){
+                console.log('beforeDestoy - 07')
+            },
+
+            destroyed(){
+                console.log('destroyed - 08')
+            }
+            
+        })
+
+    </script>
+</body>
+</html>
